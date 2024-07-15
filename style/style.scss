@@ -1,0 +1,22 @@
+$themes: (
+    'light' : (
+        'background': #ffffff,
+        'text': #000000),
+    'dark': (
+        'background': #202020,
+        'text': #fff)
+);
+@function theme-color($theme, $type) {
+    @return map-get(map-get($themes, $theme), $type);
+}
+
+@mixin generate-theme() {
+    @each $theme-name, $theme-map in $themes {
+        .theme-#{$theme-name} {
+            background-color: theme-color($theme-name, 'background');
+            color: theme-color($theme-name, 'text');
+        }
+    }
+}
+
+@include generate-theme() 
